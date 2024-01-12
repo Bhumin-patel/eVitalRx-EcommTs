@@ -7,6 +7,8 @@ export const filter = async (
     product_category?: number,
     mrp?: number,
     store_id?: number,
+    page?: number,
+    size?: number
 ): Promise<QueryResult> =>{
   
     let query: string = `   select products.*,store_id 
@@ -33,6 +35,10 @@ export const filter = async (
 
     if(whereClause.length > 0){
         query = ` ${query} where ${whereClause.join(` and `)}`;
+    }
+
+    if(page && size){
+        query = `${query} order by products.id limit ${size} offset ${(page-1)*size}`
     }
 
     return await pool.query(query);

@@ -18,7 +18,7 @@ export const filter = async (req: global.ModifiedRequest, res: Response): global
         let user_role: string = 'dummy';
 
         if(req.user && req.user.user_role){
-            user_role = req.user?.user_role;
+            user_role = req.user.user_role;
         }
 
         const allowRoles: string[] = ["super-admin","admin","user"];
@@ -27,11 +27,21 @@ export const filter = async (req: global.ModifiedRequest, res: Response): global
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	} 
 
+        let size: number = 4;
+        let page: number = 1;
+
+        if(typeof req.query.page === 'string' ){
+            page= Number(req.query.page);
+            page= page < 1 ? 1 : page;
+        }
+
         let data: QueryResult = await productService.filter(requestData.id,
                                                             requestData.name,
                                                             requestData.product_category,
                                                             requestData.mrp,
-                                                            requestData.store_id);
+                                                            requestData.store_id,
+                                                            page,
+                                                            size);
 
         return response(res, true, 200, 'Product list', data.rows);
     } catch(error){

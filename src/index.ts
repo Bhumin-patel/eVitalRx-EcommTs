@@ -3,10 +3,12 @@ import './models/postgresql';
 // import guard from './utils/guard';
 import cors from 'cors';
 import { config } from './config/default';
-import authRoutes from './api/auth/auth.routes';
-import productRoutes from './api/product/product.routes';
 import * as guard from './utils/guard';
 import { errorHandler } from './utils/error'
+
+import authRoutes from './api/auth/auth.routes';
+import productRoutes from './api/product/product.routes';
+import cartRoutes from './api/cart/cart.routes';
 
 export{};
 
@@ -22,6 +24,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/product' , guard.verifyToken, productRoutes);
+app.use('/cart' , guard.verifyToken, cartRoutes);
 app.use(errorHandler);
 
 app.listen(port, () =>{
