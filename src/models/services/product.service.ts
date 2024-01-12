@@ -11,7 +11,7 @@ export const filter = async (
   
     let query: string = `   select products.*,store_id 
                             from products join store_inventory
-                            on products.id = store_inventory.product_id`
+                            on products.id = store_inventory.product_id`;
     
     let whereClause: string[]=[];
 
