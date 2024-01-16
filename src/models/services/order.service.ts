@@ -1,5 +1,5 @@
 import { pool } from '../postgresql';
-import { Client, QueryResult } from 'pg';
+import { QueryResult } from 'pg';
 import * as global from '../../types/global'
 import * as cartService from './cart.service';
 
@@ -75,7 +75,7 @@ export const placeOrder = async (
         let dataOrder = await client.query(queryOrder,queryInputOrder);
 
         //insert order item 
-        let queryInputOrderItem = cartProducts.map((item: any,index: number)=>{
+        let queryInputOrderItem = cartProducts.map((item: global.cartResponse,index: number)=>{
             return `(
                         ${item.quantity},
                         ${mrpData[index]},
@@ -93,7 +93,7 @@ export const placeOrder = async (
         let dataOrderItem = await client.query(queryOrderItem);
 
         //update stock
-        let queryInputUpdateStock = cartProducts.map((item: any)=>{
+        let queryInputUpdateStock = cartProducts.map((item: global.cartResponse)=>{
             return [
                 item.quantity,
                 item.product_id,

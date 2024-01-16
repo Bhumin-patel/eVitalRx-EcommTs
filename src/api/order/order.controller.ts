@@ -56,7 +56,7 @@ export const placeOrder = async (req: global.ModifiedRequest, res: Response): gl
             {order: orderData.order, order_product : orderData.order_products}
             );
     } catch(error){
-        console.log('---Error in product-filter :',error);
+        console.log('---Error in order-placeOrder :',error);
         return response(res, false, 500, 'Something went wrong!', {Error:error});
     }
 };
@@ -97,7 +97,7 @@ export const cancelOrder = async (req: global.ModifiedRequest, res: Response): g
 
         return response(res, true, 200, 'order is canceled successfully!', data.rows);
     } catch(error){
-        console.log('---Error in product-filter :',error);
+        console.log('---Error in order-cancelOrder :',error);
         return response(res, false, 500, 'Something went wrong!', {Error:error});
     }
 };
@@ -136,7 +136,7 @@ export const filterOrder = async (req: global.ModifiedRequest, res: Response): g
 
         return response(res, true, 200, 'Order List!', data.rows);
     } catch(error){
-        console.log('---Error in product-filter :',error);
+        console.log('---Error in order-filterOrder :',error);
         return response(res, false, 500, 'Something went wrong!', {Error:error});
     }
 };
@@ -179,7 +179,7 @@ export const listOrderItem = async (req: global.ModifiedRequest, res: Response):
 
         return response(res, true, 200, 'Order items!', data.rows);
     } catch(error){
-        console.log('---Error in product-filter :',error);
+        console.log('---Error in order-listOrderItem :',error);
         return response(res, false, 500, 'Something went wrong!', {Error:error});
     }
 };

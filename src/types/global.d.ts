@@ -40,3 +40,13 @@ export interface placeOrderRes {
     order: any,
     order_products: any[]
 }
+
+export interface cartResponse {
+    id: number,
+    user_id: number,
+    quantity: number,
+    product_id: number,
+    store_id: number,
+    created_at: timestamp,
+    updated_at: timestamp
+}
