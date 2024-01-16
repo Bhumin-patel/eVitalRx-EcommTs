@@ -12,3 +12,5 @@ export const updateCartItem = joi.object({
     product_id: joi.number().required(),
     quantity: joi.number().allow()
 });
+
+export const deleteCartItem = joi.object({});

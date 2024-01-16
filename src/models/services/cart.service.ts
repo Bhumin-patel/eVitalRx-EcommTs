@@ -76,3 +76,33 @@ export const updateCartItem = async (
 
     return await pool.query(query, queryInput);
 };
+
+export const deleteCartItem = async (
+    product_id: number,
+    user_id: number
+): Promise<QueryResult> => {
+    
+    let query: string = `   delete from carts
+                            where product_id = $1 and user_id = $2
+                            returning *`;
+    let queryInput: number[] = [
+        product_id,
+        user_id
+    ];
+
+    return await pool.query(query, queryInput);
+};
+
+export const deleteCart = async (
+    user_id: number
+): Promise<QueryResult> => {
+   
+    let query: string = `   delete from carts
+                    where user_id = $1`;
+    
+    let queryInput: number[] = [
+        user_id
+    ];
+
+    return await pool.query(query, queryInput);
+};

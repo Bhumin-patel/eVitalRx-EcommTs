@@ -125,3 +125,45 @@ export const updateCartItem = async (req: global.ModifiedRequest, res: Response)
         return response(res, false, 500, 'Something went wrong!', {Error:error});
     }
 };
+
+export const deleteCartItem = async (req: global.ModifiedRequest, res: Response): global.cotrollerRes =>{
+    try{
+        let requestData = req.body;
+
+        const validateReq: global.validationResponse = validation(cartValidation.deleteCartItem,requestData);
+        if(!validateReq.isValid){
+            return response(res, false, 400, 'Request data is invalid.', validateReq.error);
+        }
+
+        let user_role: string = 'dummy';
+
+        if(req.user && req.user.user_role){
+            user_role = req.user.user_role;
+        }
+
+        let user_id: number = -1;
+
+        if(req.user && req.user.id){
+            user_id = req.user.id;
+        }
+
+        const allowRoles: string[] = ["super-admin","admin","user"];
+		if (!allowRoles.includes(user_role)) {
+      		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
+    	}
+
+        let product_id: number = Number(req.params.productId);
+
+        let data: QueryResult = await cartService.deleteCartItem(product_id,
+                                                                user_id);
+        
+        if(data.rows.length === 0){
+            return response(res, false, 400, 'Cart item does not exist!');
+        }
+
+        return response(res, true, 200, 'Cart item is deleted successfully!', data.rows[0]);
+    } catch(error){
+        console.log('---Error in product-filter :',error);
+        return response(res, false, 500, 'Something went wrong!', {Error:error});
+    }
+};

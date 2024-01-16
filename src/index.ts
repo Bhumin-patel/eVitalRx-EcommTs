@@ -9,6 +9,7 @@ import { errorHandler } from './utils/error'
 import authRoutes from './api/auth/auth.routes';
 import productRoutes from './api/product/product.routes';
 import cartRoutes from './api/cart/cart.routes';
+import orderRoutes from './api/order/order.routes';
 
 export{};
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/product' , guard.verifyToken, productRoutes);
 app.use('/cart' , guard.verifyToken, cartRoutes);
+app.use('/order' , guard.verifyToken, orderRoutes);
 app.use(errorHandler);
 
 app.listen(port, () =>{

@@ -33,3 +33,10 @@ export interface CustomResponse {
 }
 
 export type cotrollerRes = Promise<Response<global.CustomResponse>>;
+
+export interface placeOrderRes {
+    error: boolean;
+    error_message: string,
+    order: any,
+    order_products: any[]
+}
