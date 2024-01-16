@@ -27,7 +27,7 @@ export const add = async (req: global.ModifiedRequest, res: Response): global.co
             user_id = req.user.id;
         }
 
-        const allowRoles: string[] = ["super-admin","admin","user"];
+        const allowRoles: string[] = ["super-admin","user"];
 		if (!allowRoles.includes(user_role)) {
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	}
@@ -71,7 +71,7 @@ export const listCartItems = async (req: global.ModifiedRequest, res: Response):
             user_id = req.user.id;
         }
 
-        const allowRoles: string[] = ["super-admin","admin","user"];
+        const allowRoles: string[] = ["super-admin","user"];
 		if (!allowRoles.includes(user_role)) {
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	}
@@ -106,7 +106,7 @@ export const updateCartItem = async (req: global.ModifiedRequest, res: Response)
             user_id = req.user.id;
         }
 
-        const allowRoles: string[] = ["super-admin","admin","user"];
+        const allowRoles: string[] = ["super-admin","user"];
 		if (!allowRoles.includes(user_role)) {
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	}
@@ -147,7 +147,7 @@ export const deleteCartItem = async (req: global.ModifiedRequest, res: Response)
             user_id = req.user.id;
         }
 
-        const allowRoles: string[] = ["super-admin","admin","user"];
+        const allowRoles: string[] = ["super-admin","user"];
 		if (!allowRoles.includes(user_role)) {
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	}

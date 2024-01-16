@@ -35,13 +35,14 @@ export const filter = async (req: global.ModifiedRequest, res: Response): global
             page= page < 1 ? 1 : page;
         }
 
-        let data: QueryResult = await productService.filter(requestData.id,
+        let data: QueryResult = await productService.filter(page,
+                                                            size,
+                                                            requestData.id,
                                                             requestData.name,
                                                             requestData.product_category,
                                                             requestData.mrp,
-                                                            requestData.store_id,
-                                                            page,
-                                                            size);
+                                                            requestData.store_id
+                                                            );
 
         return response(res, true, 200, 'Product list', data.rows);
     } catch(error){

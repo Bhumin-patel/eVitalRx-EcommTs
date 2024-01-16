@@ -180,6 +180,8 @@ export const listOrderItem = async (
 
 export const filterOrder = async (
     user_id: number,
+    page: number,
+    size: number,
     order_id?: number,
     payment_status?: boolean,
     order_status?: string,
@@ -209,7 +211,7 @@ export const filterOrder = async (
         query = `${query} and ${whereClause.join(` and `)}`
     }
 
-    query = `${query} order by created_at desc`
+    query = `${query} order by created_at desc limit ${size} offset ${(page-1)*size}`
 
     return await pool.query(query);
 };

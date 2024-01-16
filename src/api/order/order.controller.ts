@@ -128,11 +128,22 @@ export const filterOrder = async (req: global.ModifiedRequest, res: Response): g
       		return response( res, true, 401, 'Unauthorized. Operation is not allowed for you.');
     	}
 
+        let size: number = 4;
+        let page: number = 1;
+
+        if(typeof req.query.page === 'string' ){
+            page= Number(req.query.page);
+            page= page < 1 ? 1 : page;
+        }
+
         let data = await orderService.filterOrder(  user_id,
+                                                    page,
+                                                    size,
                                                     requestData.id,
                                                     requestData.payment_status,
                                                     requestData.order_status,
-                                                    requestData.address_id);
+                                                    requestData.address_id
+                                                    );
 
         return response(res, true, 200, 'Order List!', data.rows);
     } catch(error){

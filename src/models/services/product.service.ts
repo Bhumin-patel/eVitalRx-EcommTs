@@ -2,13 +2,13 @@ import { pool } from '../postgresql';
 import { QueryResult } from 'pg';
 
 export const filter = async (
+    page: number,
+    size: number,
     id?: number,
     name?: string,
     product_category?: number,
     mrp?: number,
-    store_id?: number,
-    page?: number,
-    size?: number
+    store_id?: number
 ): Promise<QueryResult> =>{
   
     let query: string = `   select products.*,store_id 
